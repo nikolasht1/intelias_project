@@ -7,7 +7,7 @@ Vagrant.configure("2") do |config|
       echo "10.0.0.104  bento-test" >> /etc/hosts
   
   SHELL
-  config.vm.provision :shell, path: "C:/ubuntutest/setings_machine.sh"
+  config.vm.provision :shell, path: "C:/intelias/setings_machine.sh"
   
   config.vm.define "bento" do |bento|
       bento.vm.box = "bento/ubuntu-18.04"

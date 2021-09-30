@@ -1,0 +1,12 @@
+sudo docker build . -t mycapp:v1
+
+sudo docker run --rm -it mycapp:v1
+
+$ echo -e '#include <iostream>\nint main() { std::cout << "Hello World\\n"; }' > qq.cpp
+$ docker run --rm -v `pwd`:/tmp frolvlad/alpine-gxx c++ --static /tmp/qq.cpp -o /tmp/qq
+
+
+for pushing:
+$docker login
+$docker tag 74a557e51d29 nikolasht1/mycapp:latest
+$docker push nikolasht1/mycapp
