@@ -1,9 +1,5 @@
 #!/bin/bash
-#echo "disable swap"
-#sudo swapoff -a
-#sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
-#Install Docker Container Runtime On All The Nodes
-#Install the required packages for Docker
+
 sudo apt-get update -y
 sudo apt-get install -y \
     apt-transport-https \
@@ -25,9 +21,6 @@ echo \
 sudo apt-get update -y
 sudo apt-get install docker-ce docker-ce-cli containerd.io -y
 
-# Following configurations are recomended in the kubenetes documentation for Docker runtime. Please refer https://kubernetes.io/docs/setup/production-environment/container-runtimes/#docker
-
-#Add the docker daemon configurations to use systemd as the cgroup driver
 
 cat <<EOF | sudo tee /etc/docker/daemon.json
 {
@@ -47,20 +40,12 @@ sudo systemctl daemon-reload
 sudo systemctl restart docker
 
 echo "Docker Runtime Configured Successfully"
-#Install Kubeadm & Kubelet & Kubectl on all Nodes
-#Install the required dependencies
 
-#sudo apt-get update
-#sudo apt-get install -y apt-transport-https ca-certificates curl
-#sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+echo "make vagrant no sudo for docker"
+sudo usermod -aG docker vagrant
 
-#Add the GPG key and apt repository
-
-#echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | #sudo tee /etc/apt/sources.list.d/kubernetes.list
-
-#Update apt and install kubelet, kubeadm and kubectl
-
-#sudo apt-get update -y
-#sudo apt-get install -y kubelet kubeadm kubectl
+echo "install git"
+sudo apt-get install git
 
 sudo reboot
+
